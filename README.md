@@ -1,5 +1,8 @@
-# bookshelf-app-dicoding
- Simple web-based bookshelf app using HTML, CSS, and JavaScript. Built as part of Dicoding's Front-End Web Developer learning path.
+# Bookshelf App 📚  
+[![Live Demo](https://img.shields.io/badge/Live_Demo-online-brightgreen?style=for-the-badge&logo=vercel)](https://bookshelf-app-dicoding-theta.vercel.app)
+
+A simple web-based bookshelf app built using HTML, CSS, and JavaScript.  
+This project was developed as part of Dicoding's **Front-End Web Developer** learning path.
 
 ## 🚀 How to Use
 1. Download or clone this repository
@@ -8,12 +11,10 @@
 4. Manage your list between the two shelves
 
 ## 📸 Screenshot *(Optional)*
-*You can upload and embed a screenshot of your app here.*
+*(Upload a screenshot of your app interface here if available)*
 
 ## 🔗 Live Demo
-Deployed on [Netlify](https://netlify.com) / [Vercel](https://vercel.com)  
-*(URL to be added after deployment)*
+👉 [Try it Live](https://bookshelf-app-dicoding-theta.vercel.app)
 
 ## 👤 Author
-This project was created by **[Ari Rahmat R]** as part of the Dicoding curriculum.
-
+Created by **Ari Rahmat R** for [Dicoding](https://www.dicoding.com/academies/315) submission project.
