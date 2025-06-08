@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookshelf App</title>
+
+    <script defer src="main.js"></script>
+
+    <style>
+      /* Gaya CSS Anda */
+      body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: #f4f7f9; color: #333; }
+      header { background: #4a90e2; color: white; padding: 1rem 2rem; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      main { padding: 2rem; max-width: 900px; margin: auto; }
+      section { background: white; padding: 1.5rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+      h2 { border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1.5rem; color: #4a90e2; }
+      form div { margin-bottom: 1rem; }
+      form label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+      form input[type="text"], form input[type="number"] { width: calc(100% - 20px); padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+      form input[type="checkbox"] { margin-right: 0.5rem; }
+      form button { background: #5cb85c; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem; }
+      form button:hover { background: #4cae4c; }
+      #searchBook button { background: #f0ad4e; }
+      #searchBook button:hover { background: #ec971f; }
+      #bookFormSubmit span { font-weight: normal; font-size: 0.9em; }
+      /* Gaya untuk item buku */
+      [data-testid="bookItem"] {
+        border: 1px solid #e0e0e0;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 6px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      [data-testid="bookItem"] h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        color: #337ab7;
+      }
+      [data-testid="bookItem"] p {
+        margin: 0;
+        font-size: 0.9em;
+        color: #555;
+      }
+      [data-testid="bookItem"] div {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      [data-testid="bookItem"] button {
+        padding: 0.6rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.8em;
+        color: white;
+      }
+      [data-testid="bookItemIsCompleteButton"] { background: #007bff; }
+      [data-testid="bookItemIsCompleteButton"]:hover { background: #0056b3; }
+      [data-testid="bookItemDeleteButton"] { background: #dc3545; }
+      [data-testid="bookItemDeleteButton"]:hover { background: #c82333; }
+      [data-testid="bookItemEditButton"] { background: #ffc107; color: #333; }
+      [data-testid="bookItemEditButton"]:hover { background: #e0a800; }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        main {
+          padding: 1rem;
+        }
+        form input[type="text"], form input[type="number"] {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Bookshelf App</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2>Tambah Buku Baru</h2>
+        <form id="bookForm" data-testid="bookForm">
+          <div>
+            <label for="bookFormTitle">Judul</label>
+            <input id="bookFormTitle" type="text" required data-testid="bookFormTitleInput" />
+          </div>
+          <div>
+            <label for="bookFormAuthor">Penulis</label>
+            <input id="bookFormAuthor" type="text" required data-testid="bookFormAuthorInput" />
+          </div>
+          <div>
+            <label for="bookFormYear">Tahun</label>
+            <input id="bookFormYear" type="number" required data-testid="bookFormYearInput" />
+          </div>
+          <div>
+            <label for="bookFormIsComplete">Selesai dibaca</label>
+            <input
+              id="bookFormIsComplete"
+              type="checkbox"
+              data-testid="bookFormIsCompleteCheckbox"
+            />
+          </div>
+          <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton">
+            Masukkan Buku ke rak <span>Belum selesai dibaca</span>
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Cari Buku</h2>
+        <form id="searchBook" data-testid="searchBookForm">
+          <label for="searchBookTitle">Judul</label>
+          <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" /> <button type="submit" data-testid="searchBookFormSubmitButton">Cari</button> </form>
+      </section>
+
+      <section>
+        <h2>Belum selesai dibaca</h2>
+        <div id="incompleteBookList" data-testid="incompleteBookList">
+          <div data-bookid="123123123" data-testid="bookItem">
+            <h3 data-testid="bookItemTitle">Judul Buku 1</h3>
+            <p data-testid="bookItemAuthor">Penulis: Penulis Buku 1</p>
+            <p data-testid="bookItemYear">Tahun: 2030</p>
+            <div>
+              <button data-testid="bookItemIsCompleteButton">Selesai dibaca</button>
+              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+              <button data-testid="bookItemEditButton">Edit Buku</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Selesai dibaca</h2>
+        <div id="completeBookList" data-testid="completeBookList">
+          <div data-bookid="456456456" data-testid="bookItem">
+            <h3 data-testid="bookItemTitle">Judul Buku 2</h3>
+            <p data-testid="bookItemAuthor">Penulis: Penulis Buku 2</p>
+            <p data-testid="bookItemYear">Tahun: 2030</p>
+            <div>
+              <button data-testid="bookItemIsCompleteButton">Belum selesai dibaca</button>
+              <button data-testid="bookItemDeleteButton">Hapus Buku</button>
+              <button data-testid="bookItemEditButton">Edit Buku</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
